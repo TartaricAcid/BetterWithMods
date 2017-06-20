@@ -28,8 +28,9 @@ public class HCTorches extends Feature {
         if(removeAllOtherTorchRecipes) {
             RecipeUtils.removeRecipes(Blocks.TORCH);
         } else {
-            RecipeUtils.removeShaped(new ItemStack(Blocks.TORCH), new ItemStack[][]{new ItemStack[]{new ItemStack(Items.COAL,1,0)},new ItemStack[]{new ItemStack(Items.STICK)}});
-            RecipeUtils.removeShaped(new ItemStack(Blocks.TORCH), new ItemStack[][]{new ItemStack[]{new ItemStack(Items.COAL,1,1)},new ItemStack[]{new ItemStack(Items.STICK)}});
+            //TODO removeShaped
+//            RecipeUtils.removeShaped(new ItemStack(Blocks.TORCH), new ItemStack[][]{new ItemStack[]{new ItemStack(Items.COAL,1,0)},new ItemStack[]{new ItemStack(Items.STICK)}});
+//            RecipeUtils.removeShaped(new ItemStack(Blocks.TORCH), new ItemStack[][]{new ItemStack[]{new ItemStack(Items.COAL,1,1)},new ItemStack[]{new ItemStack(Items.STICK)}});
         }
         RecipeUtils.addOreRecipe(new ItemStack(Blocks.TORCH), "C", "S", 'C', new ItemStack(Items.COAL, 1, 0), 'S', "stickWood");
         RecipeUtils.addOreRecipe(new ItemStack(Blocks.TORCH), "C", "S", 'C', new ItemStack(Items.COAL, 1, 1), 'S', "stickWood");

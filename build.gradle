@@ -4,14 +4,14 @@ buildscript {
         maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.2.29-1.11.2"
+version = "1.3.30-1.12.2"
 group = "betterwithmods" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Better With Mods"
 
@@ -21,9 +21,9 @@ compileJava {
 }
 
 minecraft {
-    version = "1.11.2-13.20.0.2282"
+    version = "14.21.0.2338"
     runDir = "run"
-    mappings = "snapshot_20170608"
+    mappings = "snapshot_20170619"
     replace "%VERSION%":"${project.version}"
 }
 repositories {
@@ -32,14 +32,14 @@ repositories {
     maven { url "http://maven.amadornes.com/" }
 }
 dependencies {
-    deobfCompile "mezz.jei:jei_1.11.2:+"
-	deobfCompile "slimeknights.mantle:Mantle:1.11.2+"
-	deobfCompile "slimeknights:TConstruct:1.11.2+"
-    deobfCompile "MineTweaker3:MineTweaker3-API:3.0.25.103"
-    deobfCompile "com.blamejared:MTLib:2.+"
-    deobfCompile "MCMultiPart2:MCMultiPart:2.0.1"
-//    deobfCompile "blusunrize:ImmersiveEngineering:0.11-59-108:deobf"
-    files("libs/*")
+    deobfCompile "mezz.jei:jei_1.12:+"
+//	deobfCompile "slimeknights.mantle:Mantle:1.11.2+"
+//	deobfCompile "slimeknights:TConstruct:1.11.2+"
+//    deobfCompile "MineTweaker3:MineTweaker3-API:3.0.25.103"
+//    deobfCompile "com.blamejared:MTLib:2.+"
+//    deobfCompile "MCMultiPart2:MCMultiPart:2.0.1"
+//    deobfCompile "blusunrize:ImmersiveEngineering:0.11-63-145:deobf"
+//    files("libs/*")
 }
 
 jar {

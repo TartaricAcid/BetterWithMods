@@ -24,7 +24,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -41,13 +40,8 @@ import java.util.Random;
 
 public class BlockMechMachines extends BWMBlock implements IMechanicalBlock, IMultiVariants {
 
-    public static ItemStack getStack(EnumType type) {
-        return new ItemStack(BWMBlocks.SINGLE_MACHINES, 1, type.getMeta() << 1);
-    }
-
     public static final PropertyBool ISACTIVE = PropertyBool.create("ison");
     public static final PropertyEnum<BlockMechMachines.EnumType> MACHINETYPE = PropertyEnum.create("machinetype", BlockMechMachines.EnumType.class);
-
     public BlockMechMachines() {
         super(Material.ROCK);
         this.setTickRandomly(true);
@@ -57,6 +51,10 @@ public class BlockMechMachines extends BWMBlock implements IMechanicalBlock, IMu
                 .withProperty(ISACTIVE, false)
         );
         this.useNeighborBrightness = true;
+    }
+
+    public static ItemStack getStack(EnumType type) {
+        return new ItemStack(BWMBlocks.SINGLE_MACHINES, 1, type.getMeta() << 1);
     }
 
     @Override
@@ -244,10 +242,9 @@ public class BlockMechMachines extends BWMBlock implements IMechanicalBlock, IMu
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
         for (EnumType type : EnumType.META_LOOKUP)
-            list.add(new ItemStack(item, 1, type.getMeta() << 1));
+            items.add(new ItemStack(this, 1, type.getMeta() << 1));
     }
 
     @Override

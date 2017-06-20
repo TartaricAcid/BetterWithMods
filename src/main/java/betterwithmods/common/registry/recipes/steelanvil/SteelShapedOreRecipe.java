@@ -1,6 +1,5 @@
 package betterwithmods.common.registry.steelanvil;
 
-import com.blamejared.mtlib.utils.ArrayUtils;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -8,10 +7,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -114,7 +115,7 @@ public class SteelShapedOreRecipe implements IRecipe {
         width = recipe.recipeWidth;
         height = recipe.recipeHeight;
 
-        input = new Object[recipe.recipeItems.length];
+        input = new Object[recipe.recipeItems.size()];
 
         for (int i = 0; i < input.length; i++) {
             ItemStack ingred = recipe.recipeItems[i];
@@ -147,12 +148,9 @@ public class SteelShapedOreRecipe implements IRecipe {
         return output.copy();
     }
 
-    /**
-     * Returns the size of the recipe area
-     */
     @Override
-    public int getRecipeSize() {
-        return input.length;
+    public boolean canFit(int width, int height) {
+        return false;
     }
 
     @Override
@@ -250,5 +248,21 @@ public class SteelShapedOreRecipe implements IRecipe {
     @Override
     public String toString() {
         return String.format("%s -> %s", ArrayUtils.toArrayList(input), output);
+    }
+
+    @Override
+    public IRecipe setRegistryName(ResourceLocation name) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public ResourceLocation getRegistryName() {
+        return null;
+    }
+
+    @Override
+    public Class<IRecipe> getRegistryType() {
+        return null;
     }
 }

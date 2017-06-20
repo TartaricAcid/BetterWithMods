@@ -30,7 +30,24 @@ import java.util.Set;
  */
 public class HCGloom extends Feature {
     private static final DataParameter<Integer> GLOOM_TICK = EntityDataManager.createKey(EntityPlayer.class, DataSerializers.VARINT);
+    private static final List<SoundEvent> sounds = Lists.newArrayList(SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundEvents.ENTITY_ENDERMEN_SCREAM, SoundEvents.ENTITY_SILVERFISH_AMBIENT, SoundEvents.ENTITY_WOLF_GROWL);
     private static Set<Integer> dimensionWhitelist;
+
+    public static int getGloomTime(EntityPlayer player) {
+        try {
+            return player.getDataManager().get(GLOOM_TICK);
+        } catch (NullPointerException e) {
+            return 0;
+        }
+    }
+
+    public static void incrementGloomTime(EntityPlayer player) {
+        setGloomTick(player, getGloomTime(player) + 1);
+    }
+
+    public static void setGloomTick(EntityPlayer player, int value) {
+        player.getDataManager().set(GLOOM_TICK, value);
+    }
 
     @Override
     public void setupConfig() {
@@ -42,6 +59,12 @@ public class HCGloom extends Feature {
         if (event.getEntity() instanceof EntityPlayer) {
             event.getEntity().getDataManager().register(GLOOM_TICK, 0);
         }
+    }
+
+    @SubscribeEvent
+    public void onChangeDimension(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
+        //FIXME attempt to fix #457
+        setGloomTick(event.getEntityPlayer(), 0);
     }
 
     @SubscribeEvent
@@ -86,8 +109,6 @@ public class HCGloom extends Feature {
         }
     }
 
-    private static final List<SoundEvent> sounds = Lists.newArrayList(SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundEvents.ENTITY_ENDERMEN_SCREAM, SoundEvents.ENTITY_SILVERFISH_AMBIENT, SoundEvents.ENTITY_WOLF_GROWL);
-
     public void playRandomSound(GloomPenalty gloom, World world, EntityPlayer player) {
         if (world.isRemote) {
             if (world.rand.nextInt((int) (200 / gloom.getModifier())) == 0) {
@@ -110,22 +131,6 @@ public class HCGloom extends Feature {
                 change = -(getGloomTime(event.getEntity()) / 100000f);
             event.setNewfov(event.getFov() + change);
         }
-    }
-
-    public static int getGloomTime(EntityPlayer player) {
-        try {
-            return player.getDataManager().get(GLOOM_TICK);
-        } catch (NullPointerException e) {
-            return 0;
-        }
-    }
-
-    public static void incrementGloomTime(EntityPlayer player) {
-        setGloomTick(player, getGloomTime(player) + 1);
-    }
-
-    public static void setGloomTick(EntityPlayer player, int value) {
-        player.getDataManager().set(GLOOM_TICK, value);
     }
 
     @Override

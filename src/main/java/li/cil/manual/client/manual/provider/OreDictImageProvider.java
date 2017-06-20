@@ -49,10 +49,10 @@ public final class OreDictImageProvider implements ImageProvider {
     private static List<ItemStack> getSubtypes(final Item item, final int stackSize) {
         List<ItemStack> itemStacks = new ArrayList<>();
 
-        for (CreativeTabs itemTab : item.getCreativeTabs()) {
+        for (CreativeTabs tab : item.getCreativeTabs()) {
             NonNullList<ItemStack> subItems = NonNullList.create();
             try {
-                item.getSubItems(item, itemTab, subItems);
+                item.getSubItems(tab, subItems);
             } catch (RuntimeException | LinkageError e) {
                 FMLLog.warning("Caught a crash while getting sub-items of {}", item, e);
             }

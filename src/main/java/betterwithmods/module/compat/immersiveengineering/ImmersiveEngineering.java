@@ -103,30 +103,6 @@ public class ImmersiveEngineering extends CompatFeature {
         BWMBlocks.setInventoryModel(TREATED_AXLE);
     }
 
-    BelljarHandler.DefaultPlantHandler bwmHempHandler = new BelljarHandler.DefaultPlantHandler() {
-        private HashSet<ComparableItemStack> validSeeds = new HashSet<>();
-
-        @Override
-        protected HashSet<ComparableItemStack> getSeedSet() {
-            return validSeeds;
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public IBlockState[] getRenderedPlant(ItemStack seed, ItemStack soil, float growth, TileEntity tile) {
-            int age = Math.min(7, Math.round(growth * 7));
-            if (age > 6)
-                return new IBlockState[]{BWMBlocks.HEMP.getStateFromMeta(age), BWMBlocks.HEMP.getStateFromMeta(8)};
-            return new IBlockState[]{BWMBlocks.HEMP.getStateFromMeta(age)};
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public float getRenderSize(ItemStack seed, ItemStack soil, float growth, TileEntity tile) {
-            return .7875f;
-        }
-    };
-
     @Override
     public void init(FMLInitializationEvent event) {
         ItemStack conveyorStack = ConveyorHandler.getConveyorStack("immersiveengineering:conveyor");
@@ -136,11 +112,10 @@ public class ImmersiveEngineering extends CompatFeature {
         Fluid seedOil = FluidRegistry.getFluid("plantoil");
         SqueezerRecipe.addRecipe(new FluidStack(seedOil, 120), null, new ItemStack(BWMBlocks.HEMP, 1, 0), 6400);
 
-        BelljarHandler.registerHandler(bwmHempHandler);
-        bwmHempHandler.register(new ItemStack(BWMBlocks.HEMP), new ItemStack[]{ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.HEMP), new ItemStack(BWMBlocks.HEMP)}, new ItemStack(Blocks.DIRT), BWMBlocks.HEMP.getDefaultState());
         if (overrideIndustrialHempDrops) {
             BelljarHandler.DefaultPlantHandler ieHempHandler = (BelljarHandler.DefaultPlantHandler) BelljarHandler.getHandler(new ItemStack(IEContent.itemSeeds));
-            ieHempHandler.register(new ItemStack(IEContent.itemSeeds), new ItemStack[]{ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.HEMP), new ItemStack(IEContent.itemSeeds)}, new ItemStack(Blocks.DIRT), IEContent.blockCrop.getDefaultState());
+            if(ieHempHandler != null)
+                ieHempHandler.register(new ItemStack(IEContent.itemSeeds), new ItemStack[]{ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.HEMP), new ItemStack(IEContent.itemSeeds)}, new ItemStack(Blocks.DIRT), IEContent.blockCrop.getDefaultState());
         }
         ThermoelectricHandler.registerSourceInKelvin("blockHellfire", 4000);
 

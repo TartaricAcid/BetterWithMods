@@ -5,11 +5,9 @@ import betterwithmods.client.model.render.RenderUtils;
 import betterwithmods.common.blocks.tile.TileEntityCauldron;
 import betterwithmods.common.blocks.tile.TileEntityCookingPot;
 import betterwithmods.common.blocks.tile.TileEntityCrucible;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nonnull;
 
 /**
  * Purpose:
@@ -21,7 +19,7 @@ public class TESRCookingPot extends TileEntitySpecialRenderer<TileEntityCookingP
     private int occupiedStacks;
 
     @Override
-    public void renderTileEntityFast(@Nonnull TileEntityCookingPot tile, double x, double y, double z, float partialTick, int breakStage, @Nonnull VertexBuffer renderer) {
+    public void renderTileEntityFast(TileEntityCookingPot tile, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
         if (tile != null) {
             if (occupiedStacks != tile.filledSlots())
                 occupiedStacks = tile.filledSlots();

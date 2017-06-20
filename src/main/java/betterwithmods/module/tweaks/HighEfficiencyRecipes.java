@@ -26,10 +26,10 @@ public class HighEfficiencyRecipes extends Feature {
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.PLATFORM), "MWM", " M ", "MWM", 'M', "sidingWood", 'W', new ItemStack(BWMBlocks.PANE, 1, 2));
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.AXLE), "M", "R", "M", 'M', "mouldingWood", 'R', BWMBlocks.ROPE);
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.GEARBOX), "SGS", "GLG", "SGS", 'L', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.REDSTONE_LATCH), 'S', "sidingWood", 'G', "gearWood");
-        RecipeUtils.addOreRecipe(new ItemStack(Blocks.STONE_BRICK_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.STONEBRICK.getMetadata())).setMirrored(true);
-        RecipeUtils.addOreRecipe(new ItemStack(Blocks.NETHER_BRICK_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.NETHERBRICK.getMetadata())).setMirrored(true);
-        RecipeUtils.addOreRecipe(new ItemStack(Blocks.BRICK_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.BRICK.getMetadata())).setMirrored(true);
-        RecipeUtils.addOreRecipe(new ItemStack(Blocks.SANDSTONE_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.SANDSTONE.getMetadata())).setMirrored(true);
+        RecipeUtils.addOreRecipe(new ItemStack(Blocks.STONE_BRICK_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.STONEBRICK.getMetadata()));
+        RecipeUtils.addOreRecipe(new ItemStack(Blocks.NETHER_BRICK_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.NETHERBRICK.getMetadata()));
+        RecipeUtils.addOreRecipe(new ItemStack(Blocks.BRICK_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.BRICK.getMetadata()));
+        RecipeUtils.addOreRecipe(new ItemStack(Blocks.SANDSTONE_STAIRS), "M ", "MM", 'M', new ItemStack(BWMBlocks.STONE_MOULDING, 1, BlockMini.EnumType.SANDSTONE.getMetadata()));
         RecipeUtils.addOreRecipe(new ItemStack(Blocks.NOTEBLOCK), "SSS", "SRS", "SSS", 'S', "sidingWood", 'R', "dustRedstone");
         RecipeUtils.addOreRecipe(new ItemStack(Blocks.JUKEBOX), "SSS", "SDS", "SSS", 'S', "sidingWood", 'D', "gemDiamond");
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.SAW), "III", "GBG", "WGW", 'I', "ingotIron", 'G', "gearWood", 'W', "sidingWood", 'B', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_BELT));
@@ -70,7 +70,7 @@ public class HighEfficiencyRecipes extends Feature {
             RecipeUtils.addOreRecipe(boats[meta], "S S", "SSS", 'S', new ItemStack(BWMBlocks.WOOD_SIDING, 1, meta));
             RecipeUtils.addOreRecipe(fences[meta], "MMM", 'M', new ItemStack(BWMBlocks.WOOD_MOULDING, 1, meta));
             RecipeUtils.addOreRecipe(gates[meta], "MSM", 'M', new ItemStack(BWMBlocks.WOOD_MOULDING, 1, meta), 'S', new ItemStack(BWMBlocks.WOOD_SIDING, 1, meta));
-            RecipeUtils.addOreRecipe(stairs[meta], "M ", "MM", 'M', new ItemStack(BWMBlocks.WOOD_MOULDING, 1, meta)).setMirrored(true);
+            RecipeUtils.addOreRecipe(stairs[meta], "M ", "MM", 'M', new ItemStack(BWMBlocks.WOOD_MOULDING, 1, meta));
         }
     }
 

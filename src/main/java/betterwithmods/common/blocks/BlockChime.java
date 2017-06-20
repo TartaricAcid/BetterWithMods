@@ -9,10 +9,10 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -22,8 +22,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -44,9 +42,8 @@ public class BlockChime extends BWMBlock implements IMultiVariants {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         tooltip.add(I18n.format("tooltip.chime.name"));
-        super.addInformation(stack, player, tooltip, advanced);
     }
 
     @Override
@@ -58,12 +55,13 @@ public class BlockChime extends BWMBlock implements IMultiVariants {
         return variants.toArray(new String[BlockPlanks.EnumType.values().length]);
     }
 
+
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values()) {
-            list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+            list.add(new ItemStack(this, 1, blockplanks$enumtype.getMetadata()));
         }
+        super.getSubBlocks(tab, list);
     }
 
     @Override

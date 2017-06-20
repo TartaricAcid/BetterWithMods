@@ -59,8 +59,8 @@ public class HeadDrops extends Feature {
 
     private boolean isBattleAxe(EntityLivingBase entity) {
         DamageSource source = entity.getLastDamageSource();
-        if (source != null && source.getSourceOfDamage() != null) {
-            Entity e = source.getSourceOfDamage();
+        if (source != null && source.getTrueSource() != null) {
+            Entity e = source.getTrueSource();
             if (e instanceof EntityLivingBase) {
                 ItemStack held = ((EntityLivingBase) e).getHeldItemMainhand();
                 if (!held.isEmpty() && held.isItemEqual(new ItemStack(BWMItems.STEEL_BATTLEAXE))) {

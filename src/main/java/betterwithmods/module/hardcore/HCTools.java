@@ -24,15 +24,53 @@ import java.util.Set;
 public class HCTools extends Feature {
 
 
+    private static final Set<Item> TOOLS = Sets.newHashSet(
+            Items.DIAMOND_PICKAXE, Items.DIAMOND_AXE, Items.DIAMOND_SWORD, Items.DIAMOND_SHOVEL, Items.DIAMOND_HOE,
+            Items.IRON_PICKAXE, Items.IRON_AXE, Items.IRON_SWORD, Items.IRON_SHOVEL, Items.IRON_HOE,
+            Items.STONE_PICKAXE, Items.STONE_AXE, Items.STONE_SWORD, Items.STONE_SHOVEL, Items.STONE_HOE,
+            Items.GOLDEN_PICKAXE, Items.GOLDEN_AXE, Items.GOLDEN_SWORD, Items.GOLDEN_SHOVEL, Items.GOLDEN_HOE,
+            Items.WOODEN_PICKAXE, Items.WOODEN_AXE, Items.WOODEN_SWORD, Items.WOODEN_SHOVEL, Items.WOODEN_HOE
+    );
+    public static boolean earlyPickaxesRebalance;
+    public static boolean removeLowTools;
     private static int woodDurability;
     private static int stoneDurability;
     private static int ironDurability;
     private static int diamondDurability;
     private static int goldDurability;
 
-    public static boolean earlyPickaxesRebalance;
-    public static boolean removeLowTools;
+    /**
+     * Edit the values of {@link Item.ToolMaterial}.
+     * The new values are described in {@link ToolMaterialOverride}.
+     */
+    private static void changeVanillaToolMaterials() {
+        // Edit materials
+        for (Item.ToolMaterial material : Item.ToolMaterial.values()) {
+            ToolMaterialOverride newValues = ToolMaterialOverride.getOverride(material.toString());
+            if (newValues == null) continue;
+            ReflectionHelper.setPrivateValue(Item.ToolMaterial.class, material, newValues.getMaxUses(), "field_78002_g", "maxUses");
+            ReflectionHelper.setPrivateValue(Item.ToolMaterial.class, material, newValues.getEfficiencyOnProperMaterial(), "field_78010_h", "efficiencyOnProperMaterial");
+            ReflectionHelper.setPrivateValue(Item.ToolMaterial.class, material, newValues.getEnchantability(), "field_78008_j", "enchantability");
+        }
+        // Change values already taken from material at that time
 
+        for (Item item : TOOLS) {
+            if (!(item instanceof ItemTool)) continue;
+            ItemTool tool = (ItemTool) item;
+            ToolMaterialOverride newValues = ToolMaterialOverride.getOverride(tool.getToolMaterialName());
+            if (newValues == null) continue;
+            tool.setMaxDamage(newValues.getMaxUses());
+            ReflectionHelper.setPrivateValue(ItemTool.class, tool, newValues.getEfficiencyOnProperMaterial(), "field_77864_a", "efficiencyOnProperMaterial");
+        }
+    }
+
+    public static void removeLowTierToolRecipes() {
+        RecipeUtils.removeRecipes(Items.WOODEN_AXE, OreDictionary.WILDCARD_VALUE);
+        RecipeUtils.removeRecipes(Items.WOODEN_HOE, OreDictionary.WILDCARD_VALUE);
+        RecipeUtils.removeRecipes(Items.WOODEN_SWORD, OreDictionary.WILDCARD_VALUE);
+        RecipeUtils.removeRecipes(Items.STONE_HOE, OreDictionary.WILDCARD_VALUE);
+        RecipeUtils.removeRecipes(Items.STONE_SWORD, OreDictionary.WILDCARD_VALUE);
+    }
 
     @Override
     public String getFeatureDescription() {
@@ -72,88 +110,6 @@ public class HCTools extends Feature {
     }
 
     /**
-     * New values for {@link net.minecraft.item.Item.ToolMaterial}
-     */
-    private enum ToolMaterialOverride {
-        WOOD(woodDurability, 1.01F, 0),
-        STONE(stoneDurability - 1, 1.01F, 5),
-        IRON(ironDurability - 1, 6.0F, 14),
-        DIAMOND(diamondDurability - 1, 8.0F, 14),
-        GOLD(goldDurability - 1, 12.0F, 22);
-        private final int maxUses;
-        private final float efficiencyOnProperMaterial;
-        private final int enchantability;
-
-        ToolMaterialOverride(int maxUses, float efficiency, int enchantability) {
-            this.maxUses = maxUses;
-            this.efficiencyOnProperMaterial = efficiency;
-            this.enchantability = enchantability;
-        }
-
-        public static ToolMaterialOverride getOverride(Item.ToolMaterial material) {
-            switch (material) {
-                case WOOD:
-                    return ToolMaterialOverride.WOOD;
-                case STONE:
-                    return ToolMaterialOverride.STONE;
-                case IRON:
-                    return ToolMaterialOverride.IRON;
-                case DIAMOND:
-                    return ToolMaterialOverride.DIAMOND;
-                case GOLD:
-                    return ToolMaterialOverride.GOLD;
-                default:
-                    return null;
-            }
-        }
-
-        public int getMaxUses() {
-            return this.maxUses;
-        }
-
-        public float getEfficiencyOnProperMaterial() {
-            return this.efficiencyOnProperMaterial;
-        }
-
-        public int getEnchantability() {
-            return this.enchantability;
-        }
-    }
-
-    private static final Set<Item> TOOLS = Sets.newHashSet(
-            Items.DIAMOND_PICKAXE, Items.DIAMOND_AXE, Items.DIAMOND_SWORD, Items.DIAMOND_SHOVEL, Items.DIAMOND_HOE,
-            Items.IRON_PICKAXE, Items.IRON_AXE, Items.IRON_SWORD, Items.IRON_SHOVEL, Items.IRON_HOE,
-            Items.STONE_PICKAXE, Items.STONE_AXE, Items.STONE_SWORD, Items.STONE_SHOVEL, Items.STONE_HOE,
-            Items.GOLDEN_PICKAXE, Items.GOLDEN_AXE, Items.GOLDEN_SWORD, Items.GOLDEN_SHOVEL, Items.GOLDEN_HOE,
-            Items.WOODEN_PICKAXE, Items.WOODEN_AXE, Items.WOODEN_SWORD, Items.WOODEN_SHOVEL, Items.WOODEN_HOE
-    );
-
-    /**
-     * Edit the values of {@link Item.ToolMaterial}.
-     * The new values are described in {@link ToolMaterialOverride}.
-     */
-    private static void changeVanillaToolMaterials() {
-        // Edit materials
-        for (Item.ToolMaterial material : Item.ToolMaterial.values()) {
-            ToolMaterialOverride newValues = ToolMaterialOverride.getOverride(material);
-            if (newValues == null) continue;
-            ReflectionHelper.setPrivateValue(Item.ToolMaterial.class, material, newValues.getMaxUses(), "field_78002_g", "maxUses");
-            ReflectionHelper.setPrivateValue(Item.ToolMaterial.class, material, newValues.getEfficiencyOnProperMaterial(), "field_78010_h", "efficiencyOnProperMaterial");
-            ReflectionHelper.setPrivateValue(Item.ToolMaterial.class, material, newValues.getEnchantability(), "field_78008_j", "enchantability");
-        }
-        // Change values already taken from material at that time
-
-        for (Item item : TOOLS) {
-            if (!(item instanceof ItemTool)) continue;
-            ItemTool tool = (ItemTool) item;
-            ToolMaterialOverride newValues = ToolMaterialOverride.getOverride(tool.getToolMaterial());
-            if (newValues == null) continue;
-            tool.setMaxDamage(newValues.getMaxUses());
-            ReflectionHelper.setPrivateValue(ItemTool.class, tool, newValues.getEfficiencyOnProperMaterial(), "field_77864_a", "efficiencyOnProperMaterial");
-        }
-    }
-
-    /**
      * Sets the wooden pickaxe to 1 usage. Why:
      * {@link Item#setMaxDamage} used with "1" gives 2 usages, and with "0" gives unbreakable item.
      * So we needed another solution to set it to 1 usage.
@@ -175,16 +131,57 @@ public class HCTools extends Feature {
         stack.damageItem(damage, entity);
     }
 
-    public static void removeLowTierToolRecipes() {
-        RecipeUtils.removeRecipes(Items.WOODEN_AXE, OreDictionary.WILDCARD_VALUE);
-        RecipeUtils.removeRecipes(Items.WOODEN_HOE, OreDictionary.WILDCARD_VALUE);
-        RecipeUtils.removeRecipes(Items.WOODEN_SWORD, OreDictionary.WILDCARD_VALUE);
-        RecipeUtils.removeRecipes(Items.STONE_HOE, OreDictionary.WILDCARD_VALUE);
-        RecipeUtils.removeRecipes(Items.STONE_SWORD, OreDictionary.WILDCARD_VALUE);
-    }
-
     @Override
     public boolean hasSubscriptions() {
         return true;
+    }
+
+    /**
+     * New values for {@link net.minecraft.item.Item.ToolMaterial}
+     */
+    private enum ToolMaterialOverride {
+        WOOD(woodDurability, 1.01F, 0),
+        STONE(stoneDurability - 1, 1.01F, 5),
+        IRON(ironDurability - 1, 6.0F, 14),
+        DIAMOND(diamondDurability - 1, 8.0F, 14),
+        GOLD(goldDurability - 1, 12.0F, 22);
+        private final int maxUses;
+        private final float efficiencyOnProperMaterial;
+        private final int enchantability;
+
+        ToolMaterialOverride(int maxUses, float efficiency, int enchantability) {
+            this.maxUses = maxUses;
+            this.efficiencyOnProperMaterial = efficiency;
+            this.enchantability = enchantability;
+        }
+
+        public static ToolMaterialOverride getOverride(String material) {
+            switch (material) {
+                case "WOOD":
+                    return ToolMaterialOverride.WOOD;
+                case "STONE":
+                    return ToolMaterialOverride.STONE;
+                case "IRON":
+                    return ToolMaterialOverride.IRON;
+                case "DIAMOND":
+                    return ToolMaterialOverride.DIAMOND;
+                case "GOLD":
+                    return ToolMaterialOverride.GOLD;
+                default:
+                    return null;
+            }
+        }
+
+        public int getMaxUses() {
+            return this.maxUses;
+        }
+
+        public float getEfficiencyOnProperMaterial() {
+            return this.efficiencyOnProperMaterial;
+        }
+
+        public int getEnchantability() {
+            return this.enchantability;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package betterwithmods.common.registry;
+package betterwithmods.common.registry.recipes;
 
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;

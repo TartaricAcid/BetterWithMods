@@ -7,7 +7,6 @@ import betterwithmods.common.BWMItems;
 import betterwithmods.common.items.ItemMaterial;
 import betterwithmods.module.hardcore.HCStumping;
 import com.google.common.collect.Lists;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -17,15 +16,12 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -36,7 +32,7 @@ import static net.minecraft.block.BlockPlanks.VARIANT;
 /**
  * @author Koward
  */
-public class BlockStump extends Block implements IMultiVariants {
+public class BlockStump extends BWMBlock implements IMultiVariants {
     private static final int MIN_TRUNK_HEIGHT = 2;
 
     public BlockStump() {
@@ -47,11 +43,6 @@ public class BlockStump extends Block implements IMultiVariants {
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockPlanks.EnumType.OAK));
         this.setHarvestLevel("axe", 0);
         Blocks.FIRE.setFireInfo(this, 5, 5);
-    }
-
-    @Override
-    public boolean isWood(IBlockAccess world, BlockPos pos) {
-        return true;
     }
 
     /**
@@ -90,6 +81,11 @@ public class BlockStump extends Block implements IMultiVariants {
     }
 
     @Override
+    public boolean isWood(IBlockAccess world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
     protected ItemStack getSilkTouchDrop(IBlockState state) {
         if (state.getProperties().containsKey(BlockPlanks.VARIANT)) {
             BlockPlanks.EnumType type = state.getValue(BlockPlanks.VARIANT);
@@ -125,17 +121,17 @@ public class BlockStump extends Block implements IMultiVariants {
     }
 
     @Override
-    public MapColor getMapColor(IBlockState state) {
+    public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         BlockPlanks.EnumType type = state.getValue(VARIANT);
         return type.getMapColor();
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values()) {
-            list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+            list.add(new ItemStack(this, 1, blockplanks$enumtype.getMetadata()));
         }
+        super.getSubBlocks(tab, list);
     }
 
     @Override

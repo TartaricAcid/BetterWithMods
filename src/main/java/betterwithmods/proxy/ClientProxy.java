@@ -10,7 +10,10 @@ import betterwithmods.client.render.*;
 import betterwithmods.common.BWMBlocks;
 import betterwithmods.common.BWMItems;
 import betterwithmods.common.blocks.BlockAesthetic;
-import betterwithmods.common.blocks.tile.*;
+import betterwithmods.common.blocks.tile.TileEntityCauldron;
+import betterwithmods.common.blocks.tile.TileEntityCrucible;
+import betterwithmods.common.blocks.tile.TileEntityFilteredHopper;
+import betterwithmods.common.blocks.tile.TileEntityTurntable;
 import betterwithmods.common.blocks.tile.gen.TileEntityWaterwheel;
 import betterwithmods.common.blocks.tile.gen.TileEntityWindmillHorizontal;
 import betterwithmods.common.blocks.tile.gen.TileEntityWindmillVertical;
@@ -101,7 +104,6 @@ public class ClientProxy implements IProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTurntable.class, new TESRTurntable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrucible.class, new TESRCookingPot());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCauldron.class, new TESRCookingPot());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileStake.class, new TESRStake());
     }
 
     private void registerColors() {

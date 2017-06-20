@@ -65,11 +65,11 @@ public class HCOres extends Feature {
             RecipeUtils.addOreRecipe(new ItemStack(Items.BUCKET), "N N", " N ", 'N', "nuggetIron");
             RecipeUtils.addShapelessOreRecipe(new ItemStack(Items.FLINT_AND_STEEL), Items.FLINT, "nuggetIron");
         }
-        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.field_191525_da, 3), new Object[]{new ItemStack(Items.BUCKET)});
-        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.field_191525_da, 4), new Object[]{new ItemStack(Items.COMPASS)});
+        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.IRON_NUGGET, 3), new Object[]{new ItemStack(Items.BUCKET)});
+        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.IRON_NUGGET, 4), new Object[]{new ItemStack(Items.COMPASS)});
         CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.GOLD_NUGGET, 4), new Object[]{new ItemStack(Items.CLOCK)});
-        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.field_191525_da), new Object[]{new ItemStack(Blocks.TRIPWIRE_HOOK, 2, 0)});
-        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.field_191525_da), new Object[]{new ItemStack(Items.FLINT_AND_STEEL)});
+        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.IRON_NUGGET), new Object[]{new ItemStack(Blocks.TRIPWIRE_HOOK, 2, 0)});
+        CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.IRON_NUGGET), new Object[]{new ItemStack(Items.FLINT_AND_STEEL)});
     }
 
     @Override

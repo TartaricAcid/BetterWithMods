@@ -54,7 +54,7 @@ public class RenderUtils {
 
     public static void renderFill(ResourceLocation textureLocation, BlockPos pos, double x, double y, double z, double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         Tessellator t = Tessellator.getInstance();
-        VertexBuffer renderer = t.getBuffer();
+        BufferBuilder renderer = t.getBuffer();
         renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
         minecraft.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         int brightness = minecraft.world.getCombinedLight(pos, minecraft.world.getLight(pos));
@@ -93,7 +93,7 @@ public class RenderUtils {
         RenderHelper.enableStandardItemLighting();
     }
 
-    private static void drawTexturedQuad(VertexBuffer renderer, TextureAtlasSprite sprite, double x, double y, double z, double w, double h, double d, int brightness, EnumFacing facing) {
+    private static void drawTexturedQuad(BufferBuilder renderer, TextureAtlasSprite sprite, double x, double y, double z, double w, double h, double d, int brightness, EnumFacing facing) {
         if (sprite == null) {
             sprite = minecraft.getTextureMapBlocks().getMissingSprite();
         }

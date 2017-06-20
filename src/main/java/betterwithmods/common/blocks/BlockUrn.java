@@ -12,7 +12,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
@@ -35,14 +34,15 @@ public class BlockUrn extends BWMBlock implements ISoulSensitive, IMultiVariants
     private static final AxisAlignedBB UNDER_HOPPER_AABB = URN_AABB.offset(0, OFFSET, 0);
 
 
-    public static ItemStack getStack(EnumUrnType type) {
-        return new ItemStack(BWMBlocks.URN, 1, type.getMeta());
-    }
     public BlockUrn() {
         super(Material.ROCK);
         this.setHardness(2.0F);
         this.setDefaultState(
                 this.blockState.getBaseState().withProperty(TYPE, EnumUrnType.EMPTY).withProperty(UNDERHOPPER, false));
+    }
+
+    public static ItemStack getStack(EnumUrnType type) {
+        return new ItemStack(BWMBlocks.URN, 1, type.getMeta());
     }
 
     @Override
@@ -140,12 +140,12 @@ public class BlockUrn extends BWMBlock implements ISoulSensitive, IMultiVariants
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-        list.add(new ItemStack(item, 1, 0));
-        list.add(new ItemStack(item, 1, 8));
-        list.add(new ItemStack(item, 1, 9));
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+        list.add(new ItemStack(this, 1, 0));
+        list.add(new ItemStack(this, 1, 8));
+        list.add(new ItemStack(this, 1, 9));
     }
+
 
     @Override
     protected BlockStateContainer createBlockState() {

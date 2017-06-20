@@ -13,7 +13,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -32,6 +31,13 @@ import java.util.Map;
 
 public class BlockBWMNewPane extends BWMBlock implements IMultiVariants {
     public static final PropertyEnum<EnumPaneType> TYPES = PropertyEnum.create("type", EnumPaneType.class);
+    private final Map<PropertyBool, AxisAlignedBB> bounds = new HashMap<PropertyBool, AxisAlignedBB>() {{
+        //new AxisAlignedBB(0.4375F, 0.0F,0.4375F, 0.5625F, 1.0F, 0.5625F)
+        put(DirUtils.NORTH, new AxisAlignedBB(0.4375F, 0.0F, 0.0F, 0.5625F, 1.0F, 0.5625F));
+        put(DirUtils.SOUTH, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 0.5625F, 1.0F, 1.0F));
+        put(DirUtils.WEST, new AxisAlignedBB(0.0F, 0.0F, 0.4375F, 0.5625F, 1.0F, 0.5625F));
+        put(DirUtils.EAST, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 1.0F, 1.0F, 0.5625F));
+    }};
 
     public BlockBWMNewPane() {
         super(Material.WOOD);
@@ -61,11 +67,11 @@ public class BlockBWMNewPane extends BWMBlock implements IMultiVariants {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         for (int i = 0; i < 6; i++) {
-            list.add(new ItemStack(item, 1, i));
+            list.add(new ItemStack(this, 1, i));
         }
+        super.getSubBlocks(tab, list);
     }
 
     @Override
@@ -100,14 +106,6 @@ public class BlockBWMNewPane extends BWMBlock implements IMultiVariants {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, extX);
         }
     }
-
-    private final Map<PropertyBool, AxisAlignedBB> bounds = new HashMap<PropertyBool, AxisAlignedBB>() {{
-        //new AxisAlignedBB(0.4375F, 0.0F,0.4375F, 0.5625F, 1.0F, 0.5625F)
-        put(DirUtils.NORTH, new AxisAlignedBB(0.4375F, 0.0F, 0.0F, 0.5625F, 1.0F, 0.5625F));
-        put(DirUtils.SOUTH, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 0.5625F, 1.0F, 1.0F));
-        put(DirUtils.WEST, new AxisAlignedBB(0.0F, 0.0F, 0.4375F, 0.5625F, 1.0F, 0.5625F));
-        put(DirUtils.EAST, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 1.0F, 1.0F, 0.5625F));
-    }};
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {

@@ -15,7 +15,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -35,16 +34,15 @@ import javax.annotation.Nullable;
  * @version 3/3/17
  */
 public class BlockCookingPot extends BWMBlock implements IMultiVariants {
-    public static ItemStack getStack(EnumType type) {
-        return new ItemStack(BWMBlocks.COOKING_POTS,1, type.getMeta());
-    }
     public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
-
     public BlockCookingPot() {
         super(Material.ROCK);
         this.setHardness(3.5F);
     }
 
+    public static ItemStack getStack(EnumType type) {
+        return new ItemStack(BWMBlocks.COOKING_POTS, 1, type.getMeta());
+    }
 
     @Override
     public int damageDropped(IBlockState state) {
@@ -67,13 +65,14 @@ public class BlockCookingPot extends BWMBlock implements IMultiVariants {
         return false;
     }
 
-
     @Override
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         for (int i = 0; i < EnumType.META_LOOKUP.length; i++) {
-            list.add(new ItemStack(itemIn, 1, i));
+            list.add(new ItemStack(this, 1, i));
         }
+        super.getSubBlocks(tab, list);
     }
+
 
     @Override
     public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {

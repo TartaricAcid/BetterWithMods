@@ -31,8 +31,8 @@ public class HCDiamond extends Feature {
         RecipeUtils.removeRecipes(Items.DIAMOND_CHESTPLATE, 0);
         RecipeUtils.removeRecipes(Items.DIAMOND_LEGGINGS, 0);
         RecipeUtils.removeRecipes(Items.DIAMOND_BOOTS, 0);
-        RecipeUtils.addOreRecipe(new ItemStack(Items.DIAMOND_AXE), "DD", "DS", " S", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood").setMirrored(true);
-        RecipeUtils.addOreRecipe(new ItemStack(Items.DIAMOND_HOE), "DD", " S", " S", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood").setMirrored(true);
+        RecipeUtils.addOreRecipe(new ItemStack(Items.DIAMOND_AXE), "DD", "DS", " S", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood");
+        RecipeUtils.addOreRecipe(new ItemStack(Items.DIAMOND_HOE), "DD", " S", " S", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood");
         RecipeUtils.addOreRecipe(new ItemStack(Items.DIAMOND_PICKAXE), "DDD", " S ", " S ", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood");
         RecipeUtils.addOreRecipe(new ItemStack(Items.DIAMOND_SHOVEL), "D", "S", "S", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood");
         RecipeUtils.addOreRecipe(new ItemStack(Items.DIAMOND_SWORD), "D", "D", "S", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood");

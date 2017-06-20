@@ -2,8 +2,6 @@ package betterwithmods.module.hardcore;
 
 import betterwithmods.common.BWMBlocks;
 import betterwithmods.common.BWMItems;
-import betterwithmods.common.items.ItemMaterial;
-import betterwithmods.common.registry.ChoppingRecipe;
 import betterwithmods.common.registry.blockmeta.managers.SawManager;
 import betterwithmods.module.Feature;
 import betterwithmods.util.RecipeUtils;
@@ -70,10 +68,10 @@ public class HCLumber extends Feature {
 
     @Override
     public void init(FMLInitializationEvent event) {
-        for (int i = 0; i < 4; i++)
-            RecipeUtils.addRecipe(new ChoppingRecipe(new ItemStack(Blocks.PLANKS, plankAmount, i), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SAWDUST, sawDustAmount), new ItemStack(BWMBlocks.DEBARKED_OLD, barkAmount, i)));
-        for (int i = 0; i < 2; i++)
-            RecipeUtils.addRecipe(new ChoppingRecipe(new ItemStack(Blocks.PLANKS, plankAmount, 4 + i), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SAWDUST, sawDustAmount), new ItemStack(BWMBlocks.DEBARKED_NEW, barkAmount, i)));
+//        for (int i = 0; i < 4; i++)
+//            RecipeUtils.addRecipe(new ChoppingRecipe(new ItemStack(Blocks.PLANKS, plankAmount, i), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SAWDUST, sawDustAmount), new ItemStack(BWMBlocks.DEBARKED_OLD, barkAmount, i)));
+//        for (int i = 0; i < 2; i++)
+//            RecipeUtils.addRecipe(new ChoppingRecipe(new ItemStack(Blocks.PLANKS, plankAmount, 4 + i), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SAWDUST, sawDustAmount), new ItemStack(BWMBlocks.DEBARKED_NEW, barkAmount, i)));
     }
 
     @Override

@@ -4,15 +4,10 @@ import betterwithmods.common.BWMBlocks;
 import betterwithmods.common.BWMItems;
 import betterwithmods.common.blocks.mini.BlockMini;
 import betterwithmods.common.items.ItemMaterial;
-import betterwithmods.common.registry.steelanvil.SteelCraftingManager;
-import betterwithmods.common.registry.steelanvil.SteelShapedOreRecipe;
-import betterwithmods.common.registry.steelanvil.SteelShapedRecipe;
-import betterwithmods.common.registry.steelanvil.SteelShapelessRecipe;
 import betterwithmods.module.Feature;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 /**
  * Created by tyler on 5/16/17.
@@ -21,21 +16,21 @@ public class AnvilRecipes extends Feature {
     public AnvilRecipes() {
         canDisable = false;
     }
-        
-    public static SteelShapedRecipe addSteelShapedRecipe(ItemStack output, Object... input) {
-        return SteelCraftingManager.getInstance().addRecipe(output, input);
+
+    public static void addSteelShapedRecipe(ItemStack output, Object... input) {
+//        SteelCraftingManager.getInstance().addRecipe(output, input);
     }
 
-    public static SteelShapedOreRecipe addSteelShapedOreRecipe(ItemStack output, Object... input) {
-        return SteelCraftingManager.getInstance().addSteelShapedOreRecipe(output, input);
+    public static void addSteelShapedOreRecipe(ItemStack output, Object... input) {
+//        return SteelCraftingManager.getInstance().addSteelShapedOreRecipe(output, input);
     }
 
-    public static SteelShapelessRecipe addSteelShapelessRecipe(ItemStack output, Object... input) {
-        return SteelCraftingManager.getInstance().addShapelessRecipe(output, input);
+    public static void addSteelShapelessRecipe(ItemStack output, Object... input) {
+//        SteelCraftingManager.getInstance().addShapelessRecipe(output, input);
     }
 
-    public static ShapelessOreRecipe addShapelessOreRecipe(ItemStack output, Object... input) {
-        return SteelCraftingManager.getInstance().addShapelessOreRecipe(output, input);
+    public static void addShapelessOreRecipe(ItemStack output, Object... input) {
+//        SteelCraftingManager.getInstance().addShapelessOreRecipe(output, input);
     }
 
     @Override

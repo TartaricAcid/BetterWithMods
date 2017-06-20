@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,9 +65,9 @@ public class ClientEventHandler {
                 double dx = (player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) event.getPartialTicks());
                 double dy = (player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) event.getPartialTicks());
                 double dz = (player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) event.getPartialTicks());
-                float x = (float) event.getTarget().hitVec.xCoord - pos.getX();
-                float y = (float) event.getTarget().hitVec.yCoord - pos.getY();
-                float z = (float) event.getTarget().hitVec.zCoord - pos.getZ();
+                float x = (float) event.getTarget().hitVec.x - pos.getX();
+                float y = (float) event.getTarget().hitVec.y - pos.getY();
+                float z = (float) event.getTarget().hitVec.z - pos.getZ();
                 BlockPos renderPos = pos.offset(side);
 
                 IBlockState placeState = ((IAdvancedRotationPlacement) block).getRenderState(world,renderPos,side,x,y,z,stack.getMetadata(),player);
@@ -77,7 +77,7 @@ public class ClientEventHandler {
                 GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
                 Tessellator tessellator = Tessellator.getInstance();
-                VertexBuffer buffer = tessellator.getBuffer();
+                BufferBuilder buffer = tessellator.getBuffer();
                 buffer.setTranslation(-dx,-dy,-dz);
                 renderBlock(placeState, renderPos, world);
                 buffer.setTranslation(0,0,0);
@@ -90,7 +90,7 @@ public class ClientEventHandler {
 
     public void renderBlock(IBlockState state, BlockPos pos, World world) {
         Tessellator tessellator = Tessellator.getInstance();
-        VertexBuffer buffer = tessellator.getBuffer();
+        BufferBuilder buffer = tessellator.getBuffer();
 
         this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         buffer.begin(GL11.GL_QUADS,DefaultVertexFormats.BLOCK);

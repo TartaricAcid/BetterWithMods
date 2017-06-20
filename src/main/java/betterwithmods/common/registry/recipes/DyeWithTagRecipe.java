@@ -1,4 +1,4 @@
-package betterwithmods.common.registry;
+package betterwithmods.common.registry.recipes;
 
 import betterwithmods.common.BWOreDictionary;
 import net.minecraft.inventory.IInventory;

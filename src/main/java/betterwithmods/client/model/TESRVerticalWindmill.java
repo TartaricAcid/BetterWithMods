@@ -1,6 +1,7 @@
 package betterwithmods.client.model;
 
 import betterwithmods.common.blocks.tile.gen.TileEntityWindmillVertical;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -11,8 +12,7 @@ public class TESRVerticalWindmill extends TileEntitySpecialRenderer<TileEntityWi
     private final ModelVerticalFrame modelFrame = new ModelVerticalFrame();
 
     @Override
-    public void renderTileEntityAt(TileEntityWindmillVertical te, double x, double y, double z,
-                                   float partialTicks, int destroyStage) {
+    public void renderTileEntityFast(TileEntityWindmillVertical te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
 
         float rotation = (te.getCurrentRotation() + (te.getRunningState() == 0 ? 0 : partialTicks * te.getPrevRotation()));
         rotation = -rotation;
@@ -30,4 +30,5 @@ public class TESRVerticalWindmill extends TileEntitySpecialRenderer<TileEntityWi
         this.modelSails.render(0.0625F, te);
         GlStateManager.popMatrix();
     }
+
 }

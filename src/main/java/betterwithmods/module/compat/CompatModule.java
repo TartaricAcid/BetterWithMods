@@ -57,7 +57,7 @@ public class CompatModule extends Module {
             if (ModuleLoader.isFeatureEnabled(HCDiamond.class)) {
                 ItemStack chisel_diamond = getItem("chisel:chisel_diamond");
                 RecipeUtils.removeRecipes(chisel_diamond);
-                RecipeUtils.addOreRecipe(chisel_diamond, " D", "S ", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood").setMirrored(true);
+                RecipeUtils.addOreRecipe(chisel_diamond, " D", "S ", 'D', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), 'S', "stickWood");
                 CrucibleRecipes.addCrucibleRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.DIAMOND_INGOT), new Object[]{getItem("chisel:chisel_diamond", 1, OreDictionary.WILDCARD_VALUE)});
             }
             CrucibleRecipes.addStokedCrucibleRecipe(new ItemStack(Items.IRON_INGOT), new Object[]{getItem("chisel:chisel_iron", 1, OreDictionary.WILDCARD_VALUE)});

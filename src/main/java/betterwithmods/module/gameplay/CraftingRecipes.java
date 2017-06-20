@@ -7,19 +7,14 @@ import betterwithmods.common.blocks.BlockCookingPot;
 import betterwithmods.common.blocks.BlockMechMachines;
 import betterwithmods.common.blocks.BlockRawPastry;
 import betterwithmods.common.items.ItemMaterial;
-import betterwithmods.common.registry.CuttingRecipe;
-import betterwithmods.common.registry.DyeWithTagRecipe;
 import betterwithmods.module.Feature;
 import betterwithmods.util.RecipeUtils;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by tyler on 5/16/17.
@@ -47,7 +42,7 @@ public class CraftingRecipes extends Feature {
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.BELLOWS), "WWW", "LLL", "BGB", 'W', "sidingWood", 'L', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.TANNED_LEATHER_CUT), 'B', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_BELT), 'G', "gearWood");
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.GEARBOX), "PGP", "GLG", "PGP", 'P', "plankWood", 'G', "gearWood", 'L', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.REDSTONE_LATCH));
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.AXLE), "X", "R", "X", 'X', "plankWood", 'R', new ItemStack(BWMBlocks.ROPE));
-        RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.HAND_CRANK), "  X", " X ", "SWS", 'X', "stickWood", 'S', "cobblestone", 'W', "gearWood").setMirrored(true);
+        RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.HAND_CRANK), "  X", " X ", "SWS", 'X', "stickWood", 'S', "cobblestone", 'W', "gearWood");
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.SLATS, 4, 0), "SS", "SS", 'S', "sidingWood");
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.GRATE, 4, 0), "WSW", "WSW", 'S', "stickWood", 'W', "mouldingWood");
         RecipeUtils.addOreRecipe(new ItemStack(BWMBlocks.PANE, 4, 2), "RRR", "RRR", 'R', Items.REEDS);
@@ -74,11 +69,10 @@ public class CraftingRecipes extends Feature {
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.HAFT), "S", "G", "X", 'S', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_STRAP), 'G', "slimeball", 'X', "mouldingWood");
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.GEAR, 2), "SWS", "W W", "SWS", 'S', "stickWood", 'W', "plankWood");
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.REDSTONE_LATCH), "GGG", " R ", 'G', "nuggetGold", 'R', "dustRedstone");
-        RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SHARPENING_STONE), "X ", " X", 'X', Items.FLINT).setMirrored(true);
-        RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.KNIFE_BLADE), "I ", " X", 'X', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SHARPENING_STONE), 'I', "ingotIron").setMirrored(true);
+        RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SHARPENING_STONE), "X ", " X", 'X', Items.FLINT);
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SCREW), "II ", " II", "II ", 'I', "ingotIron");
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.ENDER_OCULAR), "GGG", "GEG", "GGG", 'G', "nuggetGold", 'E', "enderpearl");
-        RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.WOOD_BLADE), "W  ", "WGW", "W  ", 'G', "slimeball", 'W', BWMBlocks.WOOD_SIDING).setMirrored(true);
+        RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.WOOD_BLADE), "W  ", "WGW", "W  ", 'G', "slimeball", 'W', BWMBlocks.WOOD_SIDING);
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.HEMP_CLOTH), "XXX", "XXX", "XXX", 'X', "fiberHemp");
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.WINDMILL_BLADE), "CCC", "CCC", "WWW", 'W', "slabWood", 'C', "fabricHemp");
         RecipeUtils.addOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_BELT), " L ", "L L", " L ", 'L', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_STRAP));
@@ -133,17 +127,16 @@ public class CraftingRecipes extends Feature {
         RecipeUtils.addShapelessOreRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SOAP, 9), new ItemStack(BWMBlocks.AESTHETIC, 1, BlockAesthetic.EnumType.SOAP.getMeta()));
         RecipeUtils.addShapelessOreRecipe(BlockRawPastry.getStack(BlockRawPastry.EnumType.PUMPKIN), Blocks.PUMPKIN, Items.SUGAR, BWMItems.RAW_EGG, "foodFlour");
         RecipeUtils.addShapelessOreRecipe(BlockRawPastry.getStack(BlockRawPastry.EnumType.APPLE), Items.APPLE, Items.SUGAR, BWMItems.RAW_EGG, "foodFlour");
-        RecipeUtils.addShapelessOreRecipe(BlockRawPastry.getStack(BlockRawPastry.EnumType.BREAD), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.FLOUR));
 
-
-        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_STRAP, 4), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.TANNED_LEATHER_CUT)));
-        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_CUT, 2), new ItemStack(Items.LEATHER)));
-        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.TANNED_LEATHER_CUT, 2), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.TANNED_LEATHER)));
-        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SCOURED_LEATHER_CUT, 2), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SCOURED_LEATHER)));
-
-        for (EnumDyeColor dye : EnumDyeColor.values()) {
-            RecipeUtils.addRecipe(new DyeWithTagRecipe(new ItemStack(BWMBlocks.VASE, 1, dye.getMetadata()), new ItemStack(BWMBlocks.VASE, 1, OreDictionary.WILDCARD_VALUE), "dye" + StringUtils.capitalize(dye.getName())));
-        }
+        //FIXME Custom IRecipes
+//        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_STRAP, 4), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.TANNED_LEATHER_CUT)));
+//        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.LEATHER_CUT, 2), new ItemStack(Items.LEATHER)));
+//        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.TANNED_LEATHER_CUT, 2), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.TANNED_LEATHER)));
+//        RecipeUtils.addRecipe(new CuttingRecipe(ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SCOURED_LEATHER_CUT, 2), ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.SCOURED_LEATHER)));
+//
+//        for (EnumDyeColor dye : EnumDyeColor.values()) {
+//            RecipeUtils.addRecipe(new DyeWithTagRecipe(new ItemStack(BWMBlocks.VASE, 1, dye.getMetadata()), new ItemStack(BWMBlocks.VASE, 1, OreDictionary.WILDCARD_VALUE), "dye" + StringUtils.capitalize(dye.getName())));
+//        }
 
         GameRegistry.addSmelting(BWMItems.RAW_EGG, new ItemStack(BWMItems.COOKED_EGG), 0.1F);
         GameRegistry.addSmelting(BWMItems.RAW_SCRAMBLED_EGG, new ItemStack(BWMItems.COOKED_SCRAMBLED_EGG), 0.1F);

@@ -16,7 +16,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -98,9 +97,10 @@ public class BlockDirtSlab extends BlockSimpleSlab implements IMultiVariants {
     }
 
     @Override
-    public MapColor getMapColor(IBlockState state) {
+    public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return (state.getValue(VARIANT)).getColor();
     }
+
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
@@ -121,13 +121,13 @@ public class BlockDirtSlab extends BlockSimpleSlab implements IMultiVariants {
         return state;
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
-        list.add(new ItemStack(this, 1, DirtSlabType.DIRT.getMetadata()));
-        list.add(new ItemStack(this, 1, DirtSlabType.GRASS.getMetadata()));
-        list.add(new ItemStack(this, 1, DirtSlabType.MYCELIUM.getMetadata()));
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this, 1, DirtSlabType.DIRT.getMetadata()));
+        items.add(new ItemStack(this, 1, DirtSlabType.GRASS.getMetadata()));
+        items.add(new ItemStack(this, 1, DirtSlabType.MYCELIUM.getMetadata()));
     }
+
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {

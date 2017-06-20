@@ -34,6 +34,13 @@ import java.util.Random;
 
 public class BlockBWMPane extends BWMBlock implements IMultiVariants {
     public static final PropertyEnum<EnumPaneType> TYPES = PropertyEnum.create("type", EnumPaneType.class);
+    private final Map<PropertyBool, AxisAlignedBB> bounds = new HashMap<PropertyBool, AxisAlignedBB>() {{
+        //new AxisAlignedBB(0.4375F, 0.0F,0.4375F, 0.5625F, 1.0F, 0.5625F)
+        put(DirUtils.NORTH, new AxisAlignedBB(0.4375F, 0.0F, 0.0F, 0.5625F, 1.0F, 0.5625F));
+        put(DirUtils.SOUTH, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 0.5625F, 1.0F, 1.0F));
+        put(DirUtils.WEST, new AxisAlignedBB(0.0F, 0.0F, 0.4375F, 0.5625F, 1.0F, 0.5625F));
+        put(DirUtils.EAST, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 1.0F, 1.0F, 0.5625F));
+    }};
 
     public BlockBWMPane() {
         super(Material.WOOD);
@@ -90,14 +97,6 @@ public class BlockBWMPane extends BWMBlock implements IMultiVariants {
         }
     }
 
-    private final Map<PropertyBool, AxisAlignedBB> bounds = new HashMap<PropertyBool, AxisAlignedBB>() {{
-        //new AxisAlignedBB(0.4375F, 0.0F,0.4375F, 0.5625F, 1.0F, 0.5625F)
-        put(DirUtils.NORTH, new AxisAlignedBB(0.4375F, 0.0F, 0.0F, 0.5625F, 1.0F, 0.5625F));
-        put(DirUtils.SOUTH, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 0.5625F, 1.0F, 1.0F));
-        put(DirUtils.WEST, new AxisAlignedBB(0.0F, 0.0F, 0.4375F, 0.5625F, 1.0F, 0.5625F));
-        put(DirUtils.EAST, new AxisAlignedBB(0.4375F, 0.0F, 0.4375F, 1.0F, 1.0F, 0.5625F));
-    }};
-
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
         state = state.getActualState(world, pos);
@@ -107,12 +106,12 @@ public class BlockBWMPane extends BWMBlock implements IMultiVariants {
                 bound = bound.union(bounds.get(dir));
         return bound;
     }
-
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-        list.add(new ItemStack(item, 1, 2));
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+        list.add(new ItemStack(this, 1, 2));
+        super.getSubBlocks(tab, list);
     }
+
 
     @Override
     @SideOnly(Side.CLIENT)

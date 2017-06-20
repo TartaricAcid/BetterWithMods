@@ -10,7 +10,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
@@ -19,8 +18,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 
@@ -43,12 +40,13 @@ public class BlockRawPastry extends Block implements IMultiLocations {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         for (BlockRawPastry.EnumType blockrawpastry$enumtype : EnumType.META_LOOKUP) {
-            list.add(new ItemStack(itemIn, 1, blockrawpastry$enumtype.getMetadata()));
+            items.add(new ItemStack(this, 1, blockrawpastry$enumtype.getMetadata()));
         }
+        super.getSubBlocks(itemIn, items);
     }
+
 
     @Override
     public int damageDropped(IBlockState state) {
